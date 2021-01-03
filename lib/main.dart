@@ -12,13 +12,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bara Meen',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
-        textTheme: TextTheme(
+          primaryColor: Colors.red[200],
+          accentColor: Colors.red[600],
+          fontFamily: 'Roboto',
+          textTheme: TextTheme(
             subtitle1: TextStyle(fontSize: 72.0, fontFamily: 'Hanalei'),
-            bodyText1: TextStyle(fontSize: 27.0)
-        )
-      ),
+            subtitle2: TextStyle(fontSize: 45.0, fontFamily: 'Hanalei', color: Colors.red[600]),
+            bodyText1: TextStyle(fontSize: 27.0, fontWeight: FontWeight.bold),
+            headline1: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+          )),
       home: LoginPage(),
     );
   }

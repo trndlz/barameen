@@ -1,11 +1,15 @@
-import 'package:barameen/first_screen.dart';
+import 'package:barameen/settings_page.dart';
 import 'package:barameen/sign_in.dart';
+import 'package:barameen/tab_page.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
+
+final databaseReference = FirebaseFirestore.instance;
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -18,13 +22,17 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage("assets/images/beer.png"), height: MediaQuery.of(context).size.width * 0.90),
+              Image(
+                  image: AssetImage("assets/images/beer.png"),
+                  height: MediaQuery.of(context).size.width * 0.90),
               Text("Bara Meen", style: Theme.of(context).textTheme.subtitle1),
               Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: Text("Qu'est-ce que tu as bu aujourd'hui ?", textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1)),
+                  child: Text("Qu'est-ce que tu as bu aujourd'hui ?",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyText1)),
               SizedBox(height: 50),
-              _signInButton(),
+              _signInButton()
             ],
           ),
         ),
@@ -41,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return FirstScreen();
+                  return TabPage();
                 },
               ),
             );
@@ -57,11 +65,13 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/images/google_logo.png"), height: 35.0),
+            Image(
+                image: AssetImage("assets/images/google_logo.png"),
+                height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Google',
+                'Connection avec Google',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.grey,

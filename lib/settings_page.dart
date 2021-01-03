@@ -2,18 +2,11 @@ import 'package:barameen/login_page.dart';
 import 'package:barameen/sign_in.dart';
 import 'package:flutter/material.dart';
 
-class FirstScreen extends StatelessWidget {
+class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.blue[100], Colors.blue[400]],
-          ),
-        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -29,44 +22,41 @@ class FirstScreen extends StatelessWidget {
               SizedBox(height: 40),
               Text(
                 'NAME',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                style: Theme.of(context).textTheme.headline1,
               ),
               Text(
                 name,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.deepPurple,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: 20),
               Text(
                 'EMAIL',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                style: Theme.of(context).textTheme.headline1,
               ),
               Text(
                 email,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.deepPurple,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: 40),
+              CheckboxListTile(
+                  value: true,
+                  secondary: const Icon(Icons.notifications),
+                  title: Text("Activation des notifications",
+                      style: Theme.of(context).textTheme.headline1),
+                  onChanged: null),
               RaisedButton(
                 onPressed: () {
                   signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) {
+                    return LoginPage();
+                  }), ModalRoute.withName('/'));
                 },
-                color: Colors.deepPurple,
+                color: Theme.of(context).primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Sign Out',
+                    'Se déconnecter',
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),
