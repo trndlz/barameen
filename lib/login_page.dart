@@ -1,4 +1,3 @@
-import 'package:barameen/settings_page.dart';
 import 'package:barameen/sign_in.dart';
 import 'package:barameen/tab_page.dart';
 import 'package:flutter/material.dart';

@@ -30,7 +30,7 @@ class _AddDrink extends State<AddDrink> {
 
   @override
   Widget build(BuildContext context) {
-    var alcohols = {"Bière": 5.0, "Vin": 12, "Cocktail": 12};
+    var alcohols = {"Bière": 5.0, "Vin": 12, "Cocktail": 15};
 
     print(context);
     return Scaffold(

@@ -1,4 +1,5 @@
 import 'package:barameen/add_drink.dart';
+import 'package:barameen/heat_map.dart';
 import 'package:barameen/settings_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class TabPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.subtitle2)),
           body: TabBarView(
             children: [
-              Icon(Icons.sports_bar, size: 100),
+              HeatMap(),
               AddDrink(),
               SettingsPage()
             ],
