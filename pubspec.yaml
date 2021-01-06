@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^0.14.4
   google_sign_in: ^4.5.3
   date_util: ^0.1.4
+  intl: ^0.16.1
   transparent_image: ^1.0.0
 
 

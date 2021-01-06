@@ -31,6 +31,13 @@ class TabPage extends StatelessWidget {
               SettingsPage()
             ],
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Add your onPressed code here!
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Colors.red,
+          ),
         ),
       ),
     );
