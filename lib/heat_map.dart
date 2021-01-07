@@ -3,6 +3,8 @@ import 'package:barameen/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_util/date_util.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class HeatMap extends StatelessWidget {
   @override
@@ -10,6 +12,8 @@ class HeatMap extends StatelessWidget {
     CollectionReference drinks =
         FirebaseFirestore.instance.collection('drinks');
 
+    initializeDateFormatting('fr_FR', null);
+    var formatter = new DateFormat("MMMM yyyy", 'fr');
     var dateUtility = DateUtil();
 
     int numberOfDaysInMonth(int year, int month) {
@@ -22,7 +26,7 @@ class HeatMap extends StatelessWidget {
       return (weekDay - 1);
     }
 
-    SliverList monthContainer(String month) {
+    SliverList monthContainer(int month, int year) {
       return SliverList(
         delegate: SliverChildListDelegate(
           [
@@ -30,8 +34,9 @@ class HeatMap extends StatelessWidget {
               height: 50.0,
               child: Center(
                 child: Text(
-                  month,
+                  formatter.format(new DateTime(year, month)),
                   textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 35.0, fontFamily: 'Hanalei'),
                 ),
               ),
             ),
@@ -80,9 +85,10 @@ class HeatMap extends StatelessWidget {
         alignment: Alignment.center,
         child: Text('${day + 1}'),
         decoration: BoxDecoration(
+          shape: BoxShape.circle,
             color: getColor(idx),
-            border: Border.all(color: Colors.black12),
-            borderRadius: BorderRadius.circular(10)),
+            border: idx != 0 ? Border.all(color: Colors.black12) : Border.all(color: Colors.transparent),
+        )
       );
     }
 
@@ -95,8 +101,8 @@ class HeatMap extends StatelessWidget {
         sliver: SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
+            mainAxisSpacing: 5.0,
+            crossAxisSpacing: 5.0,
             childAspectRatio: 1.0,
           ),
           delegate: SliverChildBuilderDelegate(
@@ -130,8 +136,9 @@ class HeatMap extends StatelessWidget {
           Map<DateTime, num> data = {};
 
 
+          print(userId);
 
-          if (snapshot.data.docs.isEmpty) {
+          if (snapshot.data.docs.length == 0) {
             return Scaffold(
               backgroundColor: Colors.green,
               body: Text("TU BOIS OU QUOI !?"),
@@ -167,7 +174,7 @@ class HeatMap extends StatelessWidget {
             List<Widget> list = [];
             for (var y = lastYear; y >= firstYear; y--) {
               for (var m = lastMonth; m >= firstMonth; m--) {
-                list.add(monthContainer("$m / $y"));
+                list.add(monthContainer(m, y));
                 list.add(monthlyHeatMap(y, m, data, maxPower));
               }
             }

@@ -60,7 +60,7 @@ class _AddDrink extends State<AddDrink> {
   Widget build(BuildContext context) {
     var alcohols = {"Bière": 5.0, "Vin": 12, "Cocktail": 15};
     initializeDateFormatting('fr_FR', null);
-    var formatter = new DateFormat("dd-MM-yyyy", 'fr');
+    var formatter = new DateFormat("d MMMM yyyy", 'fr');
 
     Future<void> _selectDate(BuildContext context) async {
       final DateTime pickedDate = await showDatePicker(
