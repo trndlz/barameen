@@ -76,31 +76,34 @@ class _AddDrink extends State<AddDrink> {
 
     return Scaffold(
       body: Container(
+        color: Colors.black,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 "Aujourd'hui, le",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
-              RaisedButton(
-                  onPressed: () => _selectDate(context),
-                  child: Text(formatter.format(currentDate))),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: RaisedButton(
+                  textColor: Colors.white,
+                    color: Colors.black,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(40)),
+                    onPressed: () => _selectDate(context),
+                    child: Text(formatter.format(currentDate), style: TextStyle(fontSize: 20),)),
+              ),
               Text(
                 "j'ai bu",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               DropdownButton<int>(
                 value: drinksQty,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 32,
-                elevation: 24,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
+                dropdownColor: Colors.black,
+                style: TextStyle(color: Colors.white, fontSize: 20),
                 onChanged: (int newValue) {
                   setState(() {
                     drinksQty = newValue;
@@ -116,18 +119,12 @@ class _AddDrink extends State<AddDrink> {
               ),
               Text(
                 "verre(s) de",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               DropdownButton<num>(
                 value: drinksVolume,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
+                dropdownColor: Colors.black,
+                style: TextStyle(color: Colors.white, fontSize: 20),
                 onChanged: (num newValue) {
                   setState(() {
                     drinksVolume = newValue;
@@ -141,17 +138,11 @@ class _AddDrink extends State<AddDrink> {
                   );
                 }).toList(),
               ),
-              Text("de", style: Theme.of(context).textTheme.bodyText1),
+              Text("de", style: Theme.of(context).textTheme.bodyText2),
               DropdownButton<num>(
                 value: alcoholRate,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
+                dropdownColor: Colors.black,
+                style: TextStyle(color: Colors.white, fontSize: 20),
                 onChanged: (num newValue) {
                   setState(() {
                     alcoholRate = newValue;

@@ -1,3 +1,5 @@
+import 'package:barameen/helpers.dart';
+import 'package:barameen/no_drinks.dart';
 import 'package:barameen/sign_in.dart';
 import 'package:barameen/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,7 +38,7 @@ class HeatMap extends StatelessWidget {
                 child: Text(
                   formatter.format(new DateTime(year, month)),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 35.0, fontFamily: 'Hanalei'),
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
             ),
@@ -49,33 +51,6 @@ class HeatMap extends StatelessWidget {
       return Container();
     }
 
-    Color getColor(num ratio) {
-      if (ratio == 0.0) {
-        return Colors.white;
-      } else if (ratio < 0.1) {
-        return Colors.yellow[100];
-      } else if (ratio < 0.2) {
-        return Colors.yellow[200];
-      } else if (ratio < 0.3) {
-        return Colors.yellow[300];
-      } else if (ratio < 0.4) {
-        return Colors.yellow[400];
-      } else if (ratio < 0.5) {
-        return Colors.yellow[500];
-      } else if (ratio < 0.6) {
-        return Colors.yellow[600];
-      } else if (ratio < 0.7) {
-        return Colors.yellow[700];
-      } else if (ratio < 0.8) {
-        return Colors.yellow[800];
-      } else if (ratio < 0.9) {
-        return Colors.yellow[900];
-      } else if (ratio < 1) {
-        return Colors.red;
-      } else {
-        return Colors.purpleAccent;
-      }
-    }
 
     Container filledContainer(
         int day, int month, int year, Map<DateTime, num> data, num maxPower) {
@@ -83,10 +58,10 @@ class HeatMap extends StatelessWidget {
       var idx = data.containsKey(dateTime) ? data[dateTime] / maxPower : 0;
       return Container(
         alignment: Alignment.center,
-        child: Text('${day + 1}'),
+        child: Text('${day + 1}', style: TextStyle(fontSize: 17, fontFamily: "Roboto"),),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-            color: getColor(idx),
+            color: colorGradient(idx),
             border: idx != 0 ? Border.all(color: Colors.black12) : Border.all(color: Colors.transparent),
         )
       );
@@ -134,15 +109,8 @@ class HeatMap extends StatelessWidget {
           num maxPower = 0;
 
           Map<DateTime, num> data = {};
-
-
-          print(userId);
-
           if (snapshot.data.docs.length == 0) {
-            return Scaffold(
-              backgroundColor: Colors.green,
-              body: Text("TU BOIS OU QUOI !?"),
-            );
+            return noDrinks(context);
           }
 
           snapshot.data.docs.forEach((element) {
@@ -184,6 +152,7 @@ class HeatMap extends StatelessWidget {
 
 
           return Scaffold(
+            backgroundColor: Colors.black,
             body: CustomScrollView(
               slivers: buildSliverList(
                   firstMonth, firstYear, lastMonth, lastYear, data, maxPower),

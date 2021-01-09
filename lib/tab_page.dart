@@ -20,7 +20,7 @@ class TabPage extends StatelessWidget {
                 ],
                 indicatorColor: Colors.red,
               ),
-              backgroundColor: Colors.red[200],
+              backgroundColor: Colors.black,
               centerTitle: true,
               title: Text('BARA MEEN',
                   style: Theme.of(context).textTheme.subtitle2)),
@@ -36,7 +36,7 @@ class TabPage extends StatelessWidget {
               // Add your onPressed code here!
             },
             child: Icon(Icons.add),
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.white,
           ),
         ),
       ),

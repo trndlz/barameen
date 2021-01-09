@@ -75,6 +75,9 @@ flutter:
    - family: Roboto
      fonts:
        - asset: assets/fonts/Roboto-Regular.ttf
+   - family: Bodoni
+     fonts:
+       - asset: assets/fonts/BodoniModa-VariableFont_opsz,wght.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
