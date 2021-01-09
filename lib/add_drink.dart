@@ -49,7 +49,6 @@ void addDrinkEvent(int drinksQty, num drinksVolume, num alcoholRate,
           Scaffold.of(context).showSnackBar(SnackBar(content: Text(onError))));
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _AddDrink extends State<AddDrink> {
   int drinksQty = 1;
   num drinksVolume = 25;
@@ -85,21 +84,24 @@ class _AddDrink extends State<AddDrink> {
                 "Aujourd'hui, le",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: RaisedButton(
+              SizedBox(height: 20),
+              RaisedButton(
                   textColor: Colors.white,
-                    color: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(40)),
-                    onPressed: () => _selectDate(context),
-                    child: Text(formatter.format(currentDate), style: TextStyle(fontSize: 20),)),
-              ),
+                  color: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(40)),
+                  onPressed: () => _selectDate(context),
+                  child: Text(
+                    formatter.format(currentDate),
+                    style: TextStyle(fontSize: 20),
+                  )),
+              SizedBox(height: 20),
               Text(
                 "j'ai bu",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
+              SizedBox(height: 10),
               DropdownButton<int>(
                 value: drinksQty,
                 dropdownColor: Colors.black,
@@ -117,10 +119,12 @@ class _AddDrink extends State<AddDrink> {
                   );
                 }).toList(),
               ),
+              SizedBox(height: 10),
               Text(
                 "verre(s) de",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
+              SizedBox(height: 10),
               DropdownButton<num>(
                 value: drinksVolume,
                 dropdownColor: Colors.black,
@@ -138,7 +142,9 @@ class _AddDrink extends State<AddDrink> {
                   );
                 }).toList(),
               ),
+              SizedBox(height: 10),
               Text("de", style: Theme.of(context).textTheme.bodyText2),
+              SizedBox(height: 10),
               DropdownButton<num>(
                 value: alcoholRate,
                 dropdownColor: Colors.black,
@@ -155,38 +161,21 @@ class _AddDrink extends State<AddDrink> {
                       value: alcohols[key], child: Text(key));
                 }).toList(),
               ),
-              OutlineButton(
-                splashColor: Colors.grey,
+              SizedBox(height: 20),
+              RaisedButton(
+                color: Colors.red[600],
                 onPressed: () {
                   addDrinkEvent(drinksQty, drinksVolume, alcoholRate,
                       currentDate, context);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
-                borderSide: BorderSide(color: Colors.grey),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Text('Valider',
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.grey,
-                      )),
-                ),
-              ),
-              OutlineButton(
-                splashColor: Colors.grey,
-                onPressed: () {
-                  addRandomDrinkEvents();
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                borderSide: BorderSide(color: Colors.grey),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Text('RANDOM EVENTS',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
+                        color: Colors.white,
                       )),
                 ),
               ),

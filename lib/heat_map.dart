@@ -51,20 +51,23 @@ class HeatMap extends StatelessWidget {
       return Container();
     }
 
-
     Container filledContainer(
         int day, int month, int year, Map<DateTime, num> data, num maxPower) {
       var dateTime = DateTime(year, month, day + 1);
       var idx = data.containsKey(dateTime) ? data[dateTime] / maxPower : 0;
       return Container(
-        alignment: Alignment.center,
-        child: Text('${day + 1}', style: TextStyle(fontSize: 17, fontFamily: "Roboto"),),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
+          alignment: Alignment.center,
+          child: Text(
+            '${day + 1}',
+            style: TextStyle(fontSize: 17, fontFamily: "Roboto"),
+          ),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
             color: colorGradient(idx),
-            border: idx != 0 ? Border.all(color: Colors.black12) : Border.all(color: Colors.transparent),
-        )
-      );
+            border: idx != 0
+                ? Border.all(color: Colors.black12)
+                : Border.all(color: Colors.transparent),
+          ));
     }
 
     SliverPadding monthlyHeatMap(
@@ -124,7 +127,6 @@ class HeatMap extends StatelessWidget {
             maxPower = data[date] > maxPower ? data[date] : maxPower;
           });
 
-
           var firstDate = data.keys.first;
           var firstMonth = firstDate.month;
           var firstYear = firstDate.year;
@@ -148,8 +150,6 @@ class HeatMap extends StatelessWidget {
             }
             return list;
           }
-
-
 
           return Scaffold(
             backgroundColor: Colors.black,

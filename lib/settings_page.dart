@@ -7,6 +7,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Colors.black,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -21,49 +22,34 @@ class SettingsPage extends StatelessWidget {
               ),
               SizedBox(height: 40),
               Text(
-                'NAME',
-                style: Theme.of(context).textTheme.headline1,
+                'Ton nom',
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
                 name,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: 20),
-              Text(
-                'EMAIL',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              Text(
-                email,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(height: 40),
-              CheckboxListTile(
-                  value: true,
-                  secondary: const Icon(Icons.notifications),
-                  title: Text("Activation des notifications",
-                      style: Theme.of(context).textTheme.headline1),
-                  onChanged: null),
               RaisedButton(
+                color: Colors.red[600],
                 onPressed: () {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) {
-                    return LoginPage();
-                  }), ModalRoute.withName('/'));
+                        return LoginPage();
+                      }), ModalRoute.withName('/'));
                 },
-                color: Theme.of(context).primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Se déconnecter',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                ),
-                elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
-              )
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Text('Se déconnecter',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      )),
+                ),
+              ),
             ],
           ),
         ),
