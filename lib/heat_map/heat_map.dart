@@ -5,11 +5,16 @@ import 'package:barameen/no_drinks.dart';
 import 'package:barameen/sign_in.dart';
 import 'package:barameen/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class HeatMap extends StatelessWidget {
+
+  HeatMap({Key key, this.user}) : super(key: key);
+  final User user;
+
   @override
   Widget build(BuildContext context) {
     CollectionReference drinks =
@@ -40,10 +45,14 @@ class HeatMap extends StatelessWidget {
       );
     }
 
+    if (user == null) {
+      return loadingWidget(context);
+    }
+
     return StreamBuilder<QuerySnapshot>(
       stream: drinks
           .orderBy('date', descending: false)
-          .where("user_id", isEqualTo: userId)
+          .where("user_id", isEqualTo: user.uid)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {

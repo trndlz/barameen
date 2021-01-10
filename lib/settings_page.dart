@@ -1,8 +1,13 @@
 import 'package:barameen/login_page.dart';
 import 'package:barameen/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
+
+  SettingsPage({Key key, this.user}) : super(key: key);
+  final User user;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +20,7 @@ class SettingsPage extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                  imageUrl,
+                  user.photoURL,
                 ),
                 radius: 60,
                 backgroundColor: Colors.transparent,
@@ -26,7 +31,7 @@ class SettingsPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
-                name,
+                user.displayName,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: 20),

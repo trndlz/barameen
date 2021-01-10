@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barameen/sign_in.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class AddDrink extends StatefulWidget {
-  AddDrink({Key key}) : super(key: key);
-
+  AddDrink({Key key, this.user}) : super(key: key);
+  final User user;
   @override
   _AddDrink createState() => _AddDrink();
 }
@@ -16,12 +17,12 @@ class AddDrink extends StatefulWidget {
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 CollectionReference drinksA = FirebaseFirestore.instance.collection('drinks');
 
-void addRandomDrinkEvents() {
+void addRandomDrinkEvents(User user) {
   for (var m = 1; m < 4; m++) {
     for (var i = 0; i < 20; i++) {
       var day = Random().nextInt(31) + 1;
       var drink = {
-        "user_id": userId,
+        "user_id": user.uid,
         "date": DateTime(2021, m, day),
         "drinkPower": 33 * 1 * 5 * 0.8 / 100
       };
@@ -31,10 +32,10 @@ void addRandomDrinkEvents() {
 }
 
 void addDrinkEvent(int drinksQty, num drinksVolume, num alcoholRate,
-    DateTime currentDate, BuildContext context) {
+    DateTime currentDate, BuildContext context, User user) {
   drinksA
       .add({
-        "user_id": userId,
+        "user_id": user.uid,
         "date": DateTime(currentDate.year, currentDate.month, currentDate.day),
         "drinkPower": drinksVolume * drinksQty * alcoholRate * 0.8 / 100,
       })
@@ -167,7 +168,7 @@ class _AddDrink extends State<AddDrink> {
                 onPressed: () {
                   // addRandomDrinkEvents();
                   addDrinkEvent(drinksQty, drinksVolume, alcoholRate,
-                      currentDate, context);
+                      currentDate, context, widget.user);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),

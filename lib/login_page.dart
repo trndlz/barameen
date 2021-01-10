@@ -18,6 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   void initializeFlutterFire() async {
     FirebaseAuth.instance.authStateChanges()
         .listen((User user) {
+          print("OOOOOOOO");
+          print(user);
       if (user == null) {
         setState(() {
           _isLoggedIn = false;
@@ -42,12 +44,12 @@ class _LoginPageState extends State<LoginPage> {
       return OutlineButton(
         splashColor: Colors.grey,
         onPressed: () {
-          signInWithGoogle().then((result) {
-            if (result != null) {
+          signInWithGoogle().then((user) {
+            if (user != null) {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return TabPage();
+                    return TabPage(user: user);
                   },
                 ),
               );
