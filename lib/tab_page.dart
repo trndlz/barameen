@@ -1,6 +1,7 @@
 import 'package:barameen/add_drink.dart';
-import 'package:barameen/heat_map.dart';
+import 'package:barameen/heat_map/heat_map.dart';
 import 'package:barameen/settings_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void openSettingsPage(BuildContext context) {

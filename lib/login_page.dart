@@ -1,5 +1,6 @@
 import 'package:barameen/sign_in.dart';
 import 'package:barameen/tab_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,8 +12,79 @@ class LoginPage extends StatefulWidget {
 final databaseReference = FirebaseFirestore.instance;
 
 class _LoginPageState extends State<LoginPage> {
+
+  bool _isLoggedIn = false;
+
+  void initializeFlutterFire() async {
+    FirebaseAuth.instance.authStateChanges()
+        .listen((User user) {
+      if (user == null) {
+        setState(() {
+          _isLoggedIn = false;
+        });
+      } else {
+        setState(() {
+          _isLoggedIn = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget _signInButton() {
+      return OutlineButton(
+        splashColor: Colors.grey,
+        onPressed: () {
+          signInWithGoogle().then((result) {
+            if (result != null) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return TabPage();
+                  },
+                ),
+              );
+            }
+          });
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        highlightElevation: 0,
+        borderSide: BorderSide(color: Colors.grey),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                  image: AssetImage("assets/images/google_logo.png"),
+                  height: 35.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  'Connection avec Google',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (_isLoggedIn) {
+      return new TabPage();
+    }
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -34,50 +106,6 @@ class _LoginPageState extends State<LoginPage> {
               _signInButton()
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _signInButton() {
-    return OutlineButton(
-      splashColor: Colors.grey,
-      onPressed: () {
-        signInWithGoogle().then((result) {
-          if (result != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return TabPage();
-                },
-              ),
-            );
-          }
-        });
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(
-                image: AssetImage("assets/images/google_logo.png"),
-                height: 35.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Connection avec Google',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );

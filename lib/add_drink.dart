@@ -165,6 +165,7 @@ class _AddDrink extends State<AddDrink> {
               RaisedButton(
                 color: Colors.red[600],
                 onPressed: () {
+                  // addRandomDrinkEvents();
                   addDrinkEvent(drinksQty, drinksVolume, alcoholRate,
                       currentDate, context);
                 },
