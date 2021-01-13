@@ -2,10 +2,8 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
-import 'package:barameen/sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class AddDrink extends StatefulWidget {
   AddDrink({Key key, this.user}) : super(key: key);
@@ -43,7 +41,7 @@ void addDrinkEvent(int drinksQty, num drinksVolume, num alcoholRate,
             content: Text(
                 "Tu as bien ajouté ce verre. Tu es parfaitement alcoolique !"),
             elevation: 10.0,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
           )))
       .catchError((onError) =>
@@ -59,11 +57,22 @@ class _AddDrink extends State<AddDrink> {
   @override
   Widget build(BuildContext context) {
     var alcohols = {"Bière": 5.0, "Vin": 12, "Cocktail": 15};
-    initializeDateFormatting('fr_FR', null);
     var formatter = new DateFormat("d MMMM yyyy", 'fr');
 
     Future<void> _selectDate(BuildContext context) async {
       final DateTime pickedDate = await showDatePicker(
+          builder: (BuildContext context, Widget child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                colorScheme: ColorScheme.light().copyWith(
+                  primary: Colors.red,
+                  secondary: Colors.black,
+
+                ),
+              ),
+              child: child,
+            );
+          },
           context: context,
           initialDate: currentDate,
           firstDate: DateTime(2019),
@@ -166,7 +175,7 @@ class _AddDrink extends State<AddDrink> {
               RaisedButton(
                 color: Colors.red[600],
                 onPressed: () {
-                  // addRandomDrinkEvents();
+                  // addRandomDrinkEvents(widget.user);
                   addDrinkEvent(drinksQty, drinksVolume, alcoholRate,
                       currentDate, context, widget.user);
                 },

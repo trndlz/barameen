@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'login_page.dart';
 
@@ -11,7 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  ThemeData theme = ThemeData(
+  final ThemeData theme = ThemeData(
       primaryColor: Colors.black,
       accentColor: Colors.red[600],
       fontFamily: 'Roboto',
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           fontSize: 25,
           fontFamily: "Bodoni",
         ),
-        subtitle1: TextStyle(fontSize: 72.0, fontFamily: 'Hanalei'),
+        subtitle1: TextStyle(fontSize: 72.0, fontFamily: 'Hanalei', color: Colors.red),
         subtitle2: TextStyle(
             fontSize: 45.0, fontFamily: 'Hanalei', color: Colors.white),
         bodyText1: TextStyle(
@@ -46,6 +47,12 @@ class MyApp extends StatelessWidget {
 
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate
+            ],
+            supportedLocales: [
+              const Locale('fr')
+            ],
             title: 'Bara Meen',
             theme: theme,
             home: LoginPage(),

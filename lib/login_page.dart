@@ -14,18 +14,19 @@ final databaseReference = FirebaseFirestore.instance;
 class _LoginPageState extends State<LoginPage> {
 
   bool _isLoggedIn = false;
+  User _user;
 
   void initializeFlutterFire() async {
     FirebaseAuth.instance.authStateChanges()
         .listen((User user) {
-          print("OOOOOOOO");
-          print(user);
       if (user == null) {
         setState(() {
           _isLoggedIn = false;
+          _user = null;
         });
       } else {
         setState(() {
+          _user = user;
           _isLoggedIn = true;
         });
       }
@@ -85,11 +86,11 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     if (_isLoggedIn) {
-      return new TabPage();
+      return new TabPage(user: _user);
     }
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        color: Colors.black,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -97,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Image(
                   image: AssetImage("assets/images/beer.png"),
-                  height: MediaQuery.of(context).size.width * 0.90),
+                  height: MediaQuery.of(context).size.width * 0.60),
               Text("Bara Meen", style: Theme.of(context).textTheme.subtitle1),
               Padding(
                   padding: EdgeInsets.all(16.0),

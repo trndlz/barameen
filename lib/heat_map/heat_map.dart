@@ -2,13 +2,11 @@ import 'package:barameen/heat_map/calendar.dart';
 import 'package:barameen/heat_map/caption.dart';
 import 'package:barameen/heat_map/statistics.dart';
 import 'package:barameen/no_drinks.dart';
-import 'package:barameen/sign_in.dart';
 import 'package:barameen/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class HeatMap extends StatelessWidget {
 
@@ -20,7 +18,6 @@ class HeatMap extends StatelessWidget {
     CollectionReference drinks =
     FirebaseFirestore.instance.collection('drinks');
 
-    initializeDateFormatting('fr_FR', null);
     var formatter = new DateFormat("MMMM yyyy", 'fr');
 
     SliverList sliverHeadline(String content) {
@@ -101,11 +98,18 @@ class HeatMap extends StatelessWidget {
               .inDays + 1;
 
           List<Widget> list = [];
-          for (var y = lastYear; y >= firstYear; y--) {
-            for (var m = lastMonth; m >= firstMonth; m--) {
-              list.add(sliverHeadline(formatter.format(new DateTime(y, m))));
-              list.add(monthlyHeatMap(y, m, data));
+          var y = lastYear;
+          var m = lastMonth;
+          while (y >= firstYear) {
+            while (m > 0) {
+              if (!(y == firstYear && m < firstMonth)) {
+                list.add(sliverHeadline(formatter.format(new DateTime(y, m))));
+                list.add(monthlyHeatMap(y, m, data));
+              }
+              m--;
             }
+            m = 12;
+            y--;
           }
           list.add(sliverHeadline("statistiques"));
           list.add(buildStatistics(sumPower, maxDate, numberOfDays));

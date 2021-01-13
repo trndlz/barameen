@@ -20,13 +20,15 @@ Widget noDrinks(BuildContext context) {
             ),
             FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
+              height: MediaQuery.of(context).size.width * 0.60,
               image:
                   'https://trixiatrx.files.wordpress.com/2018/09/spaceman.gif',
             ),
             Padding(
               padding: const EdgeInsets.all(35.0),
               child: Text(
-                  "Clique sur le bouton rouge pour commencer",
+                  "Clique sur la bière si tu veux commencer",
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white)),
             ),
           ],
