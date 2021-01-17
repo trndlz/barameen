@@ -20,6 +20,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+dependency_overrides:
+  intl: 0.17.0-nullsafety.2
+
 dependencies:
   flutter:
     sdk: flutter
@@ -30,7 +33,7 @@ dependencies:
   cloud_firestore: ^0.14.4
   google_sign_in: ^4.5.3
   date_util: ^0.1.4
-  intl: ^0.16.1
+  intl: ^0.14.0
   transparent_image: ^1.0.0
 
 
