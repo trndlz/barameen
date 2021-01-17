@@ -1,17 +1,23 @@
 # barameen
 
-A new Flutter application.
+The app that tracks your alcohol consumption ! ❤️
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This app is developed for the fun of discovering Flutter. But it might help people to reduce their alcohol consumption.
 
-A few resources to get you started if this is your first Flutter project:
+To build APK, run :
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```
+flutter build apk
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# barameen
+# Screenshots
+
+![alt text](https://github.com/trndlz/barameen/blob/master/img/0.png)
+
+![alt text](https://github.com/trndlz/barameen/blob/master/img/1.png)
+
+![alt text](https://github.com/trndlz/barameen/blob/master/img/2.png)
+
+![alt text](https://github.com/trndlz/barameen/blob/master/img/3.png)
